@@ -4,7 +4,7 @@ const connectDB = async ()=>{
 
     mongoose.connection.on('connected', ()=> console.log('DataBase has connected'))
 
-    await mongoose.connect(`${process.env.MONOGO_URL}/mern-auth`)
+    await mongoose.connect(`${process.env.MONGO_URL}/mern-auth`)
 }
 
 export default connectDB
