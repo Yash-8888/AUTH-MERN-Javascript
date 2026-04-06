@@ -195,7 +195,7 @@ export const resetOtp = async(req, res)=>{
     }
 }
 
-//reset user password
+//reset user password (for commit)
 
 export const resetPassword = async (req, res)=>{
     const {email, OTP, newPass}= req.body;
