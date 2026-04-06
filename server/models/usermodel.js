@@ -2,16 +2,16 @@
 import mongoose from "mongoose";
  
 const userSchema = new mongoose.Schema({
-    name : {type: string, require:true},
-    email : {type: string, require:true, unique:true},
-    password : {type: string, require:true},
-    verifyOtp : {type: string, default:''},
+    name : {type: String, require:true},
+    email : {type: String, require:true, unique:true},
+    password : {type: String, require:true},
+    verifyOtp : {type: String, default:''},
     verifyOtpExpireAt : {type: Number, default:0},
     isAccountVerifyed : {type: Boolean, default:false},
-    resetOtp: {type: string, default:''},
+    resetOtp: {type: String, default:''},
     resetOtpExpireAt: {type: Number, default: 0}
 })
 
-const userModel = mongoose.models.user || mongoose.Model('user', userSchema);
+const userModel = mongoose.models.user || mongoose.model('user', userSchema);
 
 export default userModel

@@ -3,6 +3,7 @@ import cors from "cors";
 import 'dotenv/config';
 import cookieParser from "cookie-parser";
 import connectDB from "./config/mongoDB.js";
+import authRouter from "./Routes/authRoutes.js";
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
     res.send('API Working')
 })
 
+app.use('/api/auth', authRouter)
 
 
 
