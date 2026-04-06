@@ -1,14 +1,25 @@
 import jwt from "jsonwebtoken";
+import 'dotenv/config';
 
 const userAuth = async (req, res, next)=>{
     const {token} = req.cookies;
 
     if(!token){
-        res.json({success: false, message: 'Not authorized Login again'})
+        return res.json({success: false, message: 'Not authorized Login again'})
     }
     try {
-        jwt.verify(token, process.env.JWT_SECRET)
+        
+        const tokenDecode = jwt.verify(token, process.env.JWT_SECRET)
+        if(tokenDecode.id){
+            req.body = req.body || {}
+            req.body.userId = tokenDecode.id
+        }else{
+            return res.json({success: false, message: 'Not authorized Login again'})
+        }
+
+        next();
     } catch (error) {
-        res.json({success: false, message: error.message})
+       return res.json({success: false, message: error.message})
     }
 } 
+export default userAuth;
