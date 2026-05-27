@@ -1,5 +1,5 @@
 import express from 'express'
-import { isAuth, login, logOut, register, resetOtp, resetPassword, sendVerifyOtp, verifyEmail } from '../controllers/authcontroller.js'
+import { isAuth, login, logOut, register, resetOtp, resetPassword, sendVerifyOtp, verifyEmail } from '../controllers/authController.js'
 import userAuth from '../middleware/userAuth.js'
 
 
