@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 4000
 connectDB();
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['http://localhost:5173', 'https://auth-mern-javascript.vercel.app/']
 
 app.use(express.json());
 app.use(cookieParser());
