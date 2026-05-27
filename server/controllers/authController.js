@@ -3,6 +3,8 @@ import userModel from '../models/usermodel.js'
 import jwt from 'jsonwebtoken'
 import transporter from '../config/nodeMailer.js'
 import 'dotenv/config';
+import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailTemplates.js';
+
 
 export const register = async (req, res) =>{
     const { name, email, password} = req.body
@@ -89,6 +91,7 @@ export const logOut = async (req, res)=>{
         return res.json({success: false, message: error.message})
     }
 }
+
 //send verification OTP to the user email 
 export const sendVerifyOtp = async (req, res) => {
     try {
@@ -110,7 +113,8 @@ export const sendVerifyOtp = async (req, res) => {
             from: process.env.SENDER_EMAIL,
             to: user.email,
             subject: 'Account verification OTP',
-            text: `Your OTP to verify the account is ${OTP}`
+            // text: `Your OTP to verify the account is ${OTP}`,
+            html : EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", OTP).replace("{{email}}", user.email)
         }
         await transporter.sendMail(mailOptions)
 
@@ -184,7 +188,8 @@ export const resetOtp = async(req, res)=>{
             from: process.env.SENDER_EMAIL,
             to: user.email,
             subject: 'Password Reset OTP',
-            text: `Your OTP for resetting Password is ${OTP}`
+            //text: `Your OTP for resetting Password is ${OTP}`
+            html : PASSWORD_RESET_TEMPLATE.replace("{{otp}}", OTP).replace("{{email}}", user.email)
         }
         await transporter.sendMail(mailOptions)
 
